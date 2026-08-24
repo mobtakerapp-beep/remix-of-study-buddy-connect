@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Toaster } from "@/components/ui/sonner";
-import { lovable } from "@/integrations/lovable";
+import { signInWithGoogle } from "@/lib/google-auth";
 import { supabase } from "@/integrations/supabase/client";
 
 import { useI18n } from "@/lib/i18n";
@@ -135,7 +135,7 @@ function AuthPage() {
           variant="outline"
           size="lg"
           className="mt-6 w-full rounded-full"
-          onClick={() => void signInWithGoogle()}
+          onClick={() => void handleGoogle()}
           disabled={loading}
         >
           <GoogleIcon className="me-2 h-5 w-5 shrink-0" />
