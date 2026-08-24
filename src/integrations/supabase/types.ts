@@ -19,7 +19,7 @@ export type Database = {
           active: boolean
           code: string
           created_at: string
-          created_by: string | null
+          created_by: string
           duration_days: number
           expires_at: string | null
           id: string
@@ -32,20 +32,20 @@ export type Database = {
           active?: boolean
           code: string
           created_at?: string
-          created_by?: string | null
-          duration_days?: number
+          created_by: string
+          duration_days: number
           expires_at?: string | null
           id?: string
           max_uses?: number
           note?: string | null
-          plan?: string
+          plan: string
           used_count?: number
         }
         Update: {
           active?: boolean
           code?: string
           created_at?: string
-          created_by?: string | null
+          created_by?: string
           duration_days?: number
           expires_at?: string | null
           id?: string
@@ -92,6 +92,7 @@ export type Database = {
         Row: {
           correct: number
           display_name: string
+          id: string
           points: number
           quizzes: number
           updated_at: string
@@ -100,6 +101,7 @@ export type Database = {
         Insert: {
           correct?: number
           display_name?: string
+          id?: string
           points?: number
           quizzes?: number
           updated_at?: string
@@ -108,6 +110,7 @@ export type Database = {
         Update: {
           correct?: number
           display_name?: string
+          id?: string
           points?: number
           quizzes?: number
           updated_at?: string
@@ -127,7 +130,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
-          package?: Json
+          package: Json
           title: string
           token: string
           user_id: string
@@ -144,34 +147,30 @@ export type Database = {
       }
       profiles: {
         Row: {
-          created_at: string
           id: string
-          school: string
-          teacher_name: string
-          updated_at: string
+          school: string | null
+          teacher_name: string | null
+          updated_at: string | null
         }
         Insert: {
-          created_at?: string
           id: string
-          school?: string
-          teacher_name?: string
-          updated_at?: string
+          school?: string | null
+          teacher_name?: string | null
+          updated_at?: string | null
         }
         Update: {
-          created_at?: string
           id?: string
-          school?: string
-          teacher_name?: string
-          updated_at?: string
+          school?: string | null
+          teacher_name?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
       review_items: {
         Row: {
           answer_index: number
-          created_at: string
           due_at: string
-          ease: number
+          ease: number | null
           grade: number | null
           id: string
           interval_days: number
@@ -190,13 +189,12 @@ export type Database = {
         }
         Insert: {
           answer_index?: number
-          created_at?: string
           due_at?: string
-          ease?: number
+          ease?: number | null
           grade?: number | null
           id?: string
           interval_days?: number
-          kind?: string
+          kind: string
           language?: string
           lapses?: number
           last_result?: boolean | null
@@ -211,9 +209,8 @@ export type Database = {
         }
         Update: {
           answer_index?: number
-          created_at?: string
           due_at?: string
-          ease?: number
+          ease?: number | null
           grade?: number | null
           id?: string
           interval_days?: number
@@ -234,21 +231,18 @@ export type Database = {
       }
       study_plans: {
         Row: {
-          created_at: string
           id: string
           plan: Json
           user_id: string
           week_start: string
         }
         Insert: {
-          created_at?: string
           id?: string
           plan: Json
           user_id: string
           week_start: string
         }
         Update: {
-          created_at?: string
           id?: string
           plan?: Json
           user_id?: string
@@ -297,36 +291,30 @@ export type Database = {
       }
       subscriptions: {
         Row: {
-          created_at: string
           expires_at: string | null
           generations_used: number
           id: string
           plan: string
           reset_at: string
           status: string
-          updated_at: string
           user_id: string
         }
         Insert: {
-          created_at?: string
           expires_at?: string | null
           generations_used?: number
           id?: string
           plan?: string
           reset_at?: string
           status?: string
-          updated_at?: string
           user_id: string
         }
         Update: {
-          created_at?: string
           expires_at?: string | null
           generations_used?: number
           id?: string
           plan?: string
           reset_at?: string
           status?: string
-          updated_at?: string
           user_id?: string
         }
         Relationships: []
@@ -343,7 +331,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
-          package?: Json
+          package: Json
           title: string
           updated_at?: string
           user_id: string
@@ -360,19 +348,16 @@ export type Database = {
       }
       user_roles: {
         Row: {
-          created_at: string
           id: string
           role: Database["public"]["Enums"]["app_role"]
           user_id: string
         }
         Insert: {
-          created_at?: string
           id?: string
           role: Database["public"]["Enums"]["app_role"]
           user_id: string
         }
         Update: {
-          created_at?: string
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
