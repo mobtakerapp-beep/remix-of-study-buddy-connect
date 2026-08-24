@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Toaster } from "@/components/ui/sonner";
+import { lovable } from "@/integrations/lovable";
 import { supabase } from "@/integrations/supabase/client";
 
 import { useI18n } from "@/lib/i18n";
@@ -90,14 +91,15 @@ function AuthPage() {
   const signInWithGoogle = async () => {
     setLoading(true);
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
-        },
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin,
+        extraParams: { prompt: "select_account" },
       });
 
-      if (error) throw error;
+      if (result.error) throw result.error;
+      if (result.redirected) return;
+
+      navigate({ to: "/" });
     } catch (error) {
       const raw = error instanceof Error ? error.message : String(error ?? "");
       console.error("Google sign-in failed:", error);
