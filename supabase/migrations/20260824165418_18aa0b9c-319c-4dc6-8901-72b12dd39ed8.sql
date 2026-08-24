@@ -1,1 +1,0 @@
-ALTER TABLE public.activation_codes ADD COLUMN expires_at TIMESTAMP WITH TIME ZONE;
