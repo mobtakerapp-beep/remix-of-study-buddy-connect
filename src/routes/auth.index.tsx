@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Toaster } from "@/components/ui/sonner";
-import { lovable } from "@/integrations/lovable";
+import { signInWithGoogle } from "@/lib/google-auth";
 import { supabase } from "@/integrations/supabase/client";
 
 import { useI18n } from "@/lib/i18n";
@@ -88,13 +88,10 @@ function AuthPage() {
     }
   };
 
-  const signInWithGoogle = async () => {
+  const handleGoogle = async () => {
     setLoading(true);
     try {
-      const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin,
-        extraParams: { prompt: "select_account" },
-      });
+      const result = await signInWithGoogle();
 
       if (result.error) throw result.error;
       if (result.redirected) return;
@@ -108,6 +105,7 @@ function AuthPage() {
       setLoading(false);
     }
   };
+
 
   return (
     <main className="blob-bg flex min-h-screen items-center justify-center bg-background p-4">
@@ -137,7 +135,7 @@ function AuthPage() {
           variant="outline"
           size="lg"
           className="mt-6 w-full rounded-full"
-          onClick={() => void signInWithGoogle()}
+          onClick={() => void handleGoogle()}
           disabled={loading}
         >
           <GoogleIcon className="me-2 h-5 w-5 shrink-0" />
