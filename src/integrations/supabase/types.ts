@@ -21,6 +21,7 @@ export type Database = {
           created_at: string
           created_by: string
           duration_days: number
+          expires_at: string | null
           id: string
           max_uses: number
           note: string | null
@@ -33,6 +34,7 @@ export type Database = {
           created_at?: string
           created_by: string
           duration_days: number
+          expires_at?: string | null
           id?: string
           max_uses?: number
           note?: string | null
@@ -45,6 +47,7 @@ export type Database = {
           created_at?: string
           created_by?: string
           duration_days?: number
+          expires_at?: string | null
           id?: string
           max_uses?: number
           note?: string | null
