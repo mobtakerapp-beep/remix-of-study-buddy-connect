@@ -14,16 +14,368 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      activation_codes: {
+        Row: {
+          active: boolean
+          code: string
+          created_at: string
+          created_by: string
+          duration_days: number
+          id: string
+          max_uses: number
+          note: string | null
+          plan: string
+          used_count: number
+        }
+        Insert: {
+          active?: boolean
+          code: string
+          created_at?: string
+          created_by: string
+          duration_days: number
+          id?: string
+          max_uses?: number
+          note?: string | null
+          plan: string
+          used_count?: number
+        }
+        Update: {
+          active?: boolean
+          code?: string
+          created_at?: string
+          created_by?: string
+          duration_days?: number
+          id?: string
+          max_uses?: number
+          note?: string | null
+          plan?: string
+          used_count?: number
+        }
+        Relationships: []
+      }
+      code_redemptions: {
+        Row: {
+          code_id: string
+          created_at: string
+          device_fingerprint: string | null
+          id: string
+          user_id: string
+        }
+        Insert: {
+          code_id: string
+          created_at?: string
+          device_fingerprint?: string | null
+          id?: string
+          user_id: string
+        }
+        Update: {
+          code_id?: string
+          created_at?: string
+          device_fingerprint?: string | null
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "code_redemptions_code_id_fkey"
+            columns: ["code_id"]
+            isOneToOne: false
+            referencedRelation: "activation_codes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leaderboard_entries: {
+        Row: {
+          correct: number
+          display_name: string
+          id: string
+          points: number
+          quizzes: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          correct?: number
+          display_name?: string
+          id?: string
+          points?: number
+          quizzes?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          correct?: number
+          display_name?: string
+          id?: string
+          points?: number
+          quizzes?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      lesson_shares: {
+        Row: {
+          created_at: string
+          id: string
+          package: Json
+          title: string
+          token: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          package: Json
+          title: string
+          token: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          package?: Json
+          title?: string
+          token?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          id: string
+          school: string | null
+          teacher_name: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          id: string
+          school?: string | null
+          teacher_name?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          school?: string | null
+          teacher_name?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      review_items: {
+        Row: {
+          answer_index: number
+          due_at: string
+          ease: number | null
+          grade: number | null
+          id: string
+          interval_days: number
+          kind: string
+          language: string
+          lapses: number
+          last_result: boolean | null
+          lesson_id: string | null
+          options: Json
+          prompt: string
+          question_hash: string
+          reps: number
+          topic: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          answer_index?: number
+          due_at?: string
+          ease?: number | null
+          grade?: number | null
+          id?: string
+          interval_days?: number
+          kind: string
+          language?: string
+          lapses?: number
+          last_result?: boolean | null
+          lesson_id?: string | null
+          options?: Json
+          prompt: string
+          question_hash: string
+          reps?: number
+          topic?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          answer_index?: number
+          due_at?: string
+          ease?: number | null
+          grade?: number | null
+          id?: string
+          interval_days?: number
+          kind?: string
+          language?: string
+          lapses?: number
+          last_result?: boolean | null
+          lesson_id?: string | null
+          options?: Json
+          prompt?: string
+          question_hash?: string
+          reps?: number
+          topic?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      study_plans: {
+        Row: {
+          id: string
+          plan: Json
+          user_id: string
+          week_start: string
+        }
+        Insert: {
+          id?: string
+          plan: Json
+          user_id: string
+          week_start: string
+        }
+        Update: {
+          id?: string
+          plan?: Json
+          user_id?: string
+          week_start?: string
+        }
+        Relationships: []
+      }
+      study_sessions: {
+        Row: {
+          correct: number
+          created_at: string
+          grade: number | null
+          id: string
+          kind: string
+          lesson_id: string | null
+          seconds: number
+          topic: string
+          total: number
+          user_id: string
+        }
+        Insert: {
+          correct?: number
+          created_at?: string
+          grade?: number | null
+          id?: string
+          kind?: string
+          lesson_id?: string | null
+          seconds?: number
+          topic?: string
+          total?: number
+          user_id: string
+        }
+        Update: {
+          correct?: number
+          created_at?: string
+          grade?: number | null
+          id?: string
+          kind?: string
+          lesson_id?: string | null
+          seconds?: number
+          topic?: string
+          total?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      subscriptions: {
+        Row: {
+          expires_at: string | null
+          generations_used: number
+          id: string
+          plan: string
+          reset_at: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          expires_at?: string | null
+          generations_used?: number
+          id?: string
+          plan?: string
+          reset_at?: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          expires_at?: string | null
+          generations_used?: number
+          id?: string
+          plan?: string
+          reset_at?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_lessons: {
+        Row: {
+          created_at: string
+          id: string
+          package: Json
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          package: Json
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          package?: Json
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +502,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
