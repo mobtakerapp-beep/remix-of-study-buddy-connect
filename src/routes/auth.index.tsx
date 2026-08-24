@@ -88,13 +88,10 @@ function AuthPage() {
     }
   };
 
-  const signInWithGoogle = async () => {
+  const handleGoogle = async () => {
     setLoading(true);
     try {
-      const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin,
-        extraParams: { prompt: "select_account" },
-      });
+      const result = await signInWithGoogle();
 
       if (result.error) throw result.error;
       if (result.redirected) return;
@@ -108,6 +105,7 @@ function AuthPage() {
       setLoading(false);
     }
   };
+
 
   return (
     <main className="blob-bg flex min-h-screen items-center justify-center bg-background p-4">
