@@ -13,7 +13,7 @@ export function isLovableHost() {
   return host === "localhost" || host === "127.0.0.1" || host.endsWith(".lovable.app") || host.endsWith(".lovable.dev");
 }
 
-export async function signInWithGoogle(): Promise<{ error?: Error; redirected?: boolean }> {
+export async function signInWithGoogle(): Promise<{ error?: Error | undefined; redirected?: boolean | undefined }> {
   const redirectUri = `${window.location.origin}/auth/callback`;
 
   if (isLovableHost()) {
